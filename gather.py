@@ -5,10 +5,14 @@ import pprint
 
 g = Github("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")
 
-# Get all repos from my account
-repos = g.get_user("SamuelAl").get_repo()
-for repo in repos:
-    pprint.pprint(repo)
+def get_user_repos(usr_name):
+    return g.get_user("usr_name")
+
+# Get info for a specific repo (SamuelAl/GraphApp-Stocks-Visualizer)
+repo_name = "SamuelAl/libfive"
+libfive = g.get_repo(repo_name)
+for commit in libfive.get_commits():
+    pprint.pprint(commit)
 
 
 
