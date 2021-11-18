@@ -4,7 +4,7 @@ import json
 import pprint
 # import pymongo
 
-g = Github("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e") #you know what to do
+g = Github("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") #you know what to do
 
 class CommitStats:
     additions = 0
@@ -16,6 +16,9 @@ class CommitStats:
         self.additions = additions
         self.changes = changes
         self.deletions = deletions
+
+    def __str__(self):
+        return f'Additions: {self.additions}; Changes: {self.changes}; Deletions: {self.deletions}'
 
 def calculate_commit_stats(files):
     stats = CommitStats(0,0,0)
@@ -34,10 +37,11 @@ def get_repo_commits(repo_name):
 def get_commit_stats_by_date(repo_name):
     date_dct = {} 
     commits = get_repo_commits(repo_name)
+    print(commits.totalCount)
     for commit in commits:
         files = commit.files
         stats = calculate_commit_stats(files)
-        date = commit.author.created_at
+        date = commit.commit.author.date
         if date in date_dct:
             date_stats = date_dct[date]
             date_stats.additions += stats.additions
@@ -48,8 +52,11 @@ def get_commit_stats_by_date(repo_name):
             date_dct[date] = CommitStats(stats.additions,stats.changes,stats.deletions)
     return date_dct
 
-for k,v in get_commit_stats_by_date("SamuelAl/Clothes-Annotation-Web-App"):
-    pprint.pprint(k)
-    pprint.pprint(v)
+for k,v in get_commit_stats_by_date("SamuelAl/hexbin").items():
+    print(k)
+    print(v)
+
+
+
 
 
