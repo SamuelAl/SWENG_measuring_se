@@ -1,12 +1,13 @@
-import DataChart from './Components/DataChart';
+
+import Dashboard  from './components/Dashboard'
 
 function App() {
   return (
-    <div className="App">
+    <div className="min-h-full">
       <header className="App-header">
       </header>
-      <main>
-        <DataChart></DataChart>
+      <main className="h-screen">
+        <Dashboard></Dashboard>
       </main>
     </div>
   );

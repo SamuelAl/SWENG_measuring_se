@@ -49,10 +49,9 @@ const data = [
 
 export default function DataChart() {
     return (
-        <div>
+        <div className="h-96 w-10/12">
+            <ResponsiveContainer>
             <LineChart
-                width={500}
-                height={300}
                 data={data}
                 margin={{
                     top: 5,
@@ -69,6 +68,8 @@ export default function DataChart() {
                 <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
                 <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
             </LineChart>
+            </ResponsiveContainer>
+            
         </div>
     )
 }
