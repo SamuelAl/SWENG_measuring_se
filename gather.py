@@ -42,19 +42,18 @@ def get_commit_stats_by_date(repo_name):
         files = commit.files
         stats = calculate_commit_stats(files)
         date = commit.commit.author.date
-        if date in date_dct:
-            date_stats = date_dct[date]
+        date_str = date.strftime("%Y/%m/%d")
+        if date_str in date_dct:
+            date_stats = date_dct[date_str]
             date_stats.additions += stats.additions
             date_stats.changes += stats.changes
             date_stats.deletions += stats.deletions
-            date_dct[date] = date_stats
+            date_dct[date_str] = date_stats
         else:
-            date_dct[date] = CommitStats(stats.additions,stats.changes,stats.deletions)
+            date_dct[date_str] = CommitStats(stats.additions,stats.changes,stats.deletions)
     return date_dct
 
-for k,v in get_commit_stats_by_date("SamuelAl/hexbin").items():
-    print(k)
-    print(v)
+
 
 
 
