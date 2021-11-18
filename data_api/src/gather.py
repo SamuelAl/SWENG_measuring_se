@@ -11,9 +11,15 @@ class CommitStats:
         self.additions = additions
         self.changes = changes
         self.deletions = deletions
+        self.standardized = False
 
     def __str__(self):
         return f'Additions: {self.additions}; Changes: {self.changes}; Deletions: {self.deletions}'
+    
+    def standardize(self): 
+        self.additions = self.additions / self.changes
+        self.deletions = self.deletions / self.changes
+        self.standardized = True
 
 def calculate_commit_stats(files):
     stats = CommitStats(0,0,0)
@@ -46,6 +52,11 @@ def get_commit_stats_by_date(repo_name):
             date_dct[date_str] = date_stats
         else:
             date_dct[date_str] = CommitStats(stats.additions,stats.changes,stats.deletions)
+    
+    for k,v in date_dct.items():
+        v.standardize()
+        date_dct[k] = v
+    
     return date_dct
 
 

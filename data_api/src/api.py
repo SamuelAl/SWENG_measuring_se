@@ -16,7 +16,4 @@ def get_stats(username,repo_name):
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=105)
 
-#for k,v in get_commit_stats_by_date("SamuelAl/hexbin").items():
-#    print(k)
-#    print(v)
 
