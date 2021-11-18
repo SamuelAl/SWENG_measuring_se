@@ -7,11 +7,6 @@ import pprint
 g = Github("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") #you know what to do
 
 class CommitStats:
-    additions = 0
-    changes = 0
-    deletions = 0
-
-
     def __init__(self, additions, changes, deletions):
         self.additions = additions
         self.changes = changes
