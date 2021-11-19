@@ -1,5 +1,5 @@
-import {React, Component} from 'react'
-import { Disclosure} from '@headlessui/react'
+import { React, Component } from 'react'
+import { Disclosure } from '@headlessui/react'
 import { SearchIcon } from '@heroicons/react/solid'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import DataChart from './DataChart'
@@ -60,13 +60,33 @@ const data = [
 export default class Dashboard extends Component {
 
     state = {
-        data: {}
+        data: []
     }
 
     componentDidMount() {
         fetch('http://10.5.64.223:105/data/user/SamuelAl/repo/hexbin/')
-        .then(response => response.json())
-        .then(data => console.log(data))
+            .then(response => response.json())
+            .then(body => {
+                let prcData = this.prepareData(body)
+                this.setState({
+                    data: prcData
+                }, () => {
+                    console.log(this.state)
+                })
+            })
+    }
+
+    prepareData = (rawData) => {
+        return Object.keys(rawData)
+        .map((key) => {
+            return ({
+                date: key,
+                additions: rawData[key].additions,
+                changes: rawData[key].changes,
+                deletions: rawData[key].deletions,
+            })
+        })
+        .sort((a,b) => a.date.localeCompare(b.date))    
     }
 
     render() {
@@ -118,14 +138,16 @@ export default class Dashboard extends Component {
                             </div>
                         </header>
                     </div>
-    
+
                     <main className="h-full -mt-32">
                         <div className="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
                             {/* Replace with your content */}
                             <div className="flex justify-center  bg-white rounded-lg shadow px-5 py-6 sm:px-6">
-                                
-                                    <DataChart data={data}></DataChart>
-                                
+
+                                {this.state.data != null &&
+                                    <DataChart data={this.state.data}></DataChart>
+                                }
+
                             </div>
                             {/* /End replace */}
                         </div>
@@ -134,5 +156,5 @@ export default class Dashboard extends Component {
             </>
         )
     }
-    
+
 }

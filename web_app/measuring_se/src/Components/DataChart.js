@@ -18,12 +18,11 @@ export default function DataChart({data}) {
                     }}
                 >
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
+                    <XAxis dataKey="date" />
                     <YAxis />
                     <Tooltip />
-                    <Area type="monotone" dataKey="uv" stackId="1" stroke="#8884d8" fill="#8884d8" />
-                    <Area type="monotone" dataKey="pv" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
-                    <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" />
+                    <Area type="monotone" dataKey="additions" stackId="1" stroke="#65EB9D" fill="#65EB9D" />
+                    <Area type="monotone" dataKey="deletions" stackId="1" stroke="#EB827A" fill="#EB827A" />
                 </AreaChart>
             </ResponsiveContainer>
 
