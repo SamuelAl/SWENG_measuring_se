@@ -1,8 +1,11 @@
 from flask import Flask
+from flask_cors import CORS
 import jsonpickle
 from gather import *
 
 app = Flask(__name__)
+cors = CORS(app)
+
 
 @app.route('/hello/', methods=['GET','POST'])
 def welcome():

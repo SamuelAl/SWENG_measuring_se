@@ -58,7 +58,17 @@ const data = [
     },
 ];
 export default class Dashboard extends Component {
-    
+
+    state = {
+        data: {}
+    }
+
+    componentDidMount() {
+        fetch('http://10.5.64.223:105/data/user/SamuelAl/repo/hexbin/')
+        .then(response => response.json())
+        .then(data => console.log(data))
+    }
+
     render() {
         return (
             <>
