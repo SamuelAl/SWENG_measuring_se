@@ -53,9 +53,9 @@ def get_commit_stats_by_date(repo_name):
         else:
             date_dct[date_str] = CommitStats(stats.additions,stats.changes,stats.deletions)
     
-    for k,v in date_dct.items():
-        v.standardize()
-        date_dct[k] = v
+    #for k,v in date_dct.items():
+    #   v.standardize()
+    #   date_dct[k] = v
     
     return date_dct
 

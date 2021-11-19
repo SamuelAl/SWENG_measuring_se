@@ -54,9 +54,8 @@ def get_stats(username,repo_name):
 @app.route('/api/repo/', methods=['GET','POST'])
 def get_stats_from_params():
     repo = request.args.get('repo')
-    user = request.args.get('user')
-    print(f'Repo: {repo}; User: {user}')
-    return jsonpickle.encode(dummy_data)
+    print(f'Getting info for Repo: {repo}')
+    return jsonpickle.encode(get_commit_stats_by_date(repo))
 
 
 if __name__ == '__main__':
