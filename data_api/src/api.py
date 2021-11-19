@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 import jsonpickle
 from gather import *
@@ -49,6 +49,15 @@ def get_stats(username,repo_name):
     #full_repo_name = username + "/" + repo_name
     #return jsonpickle.encode(get_commit_stats_by_date(full_repo_name))
     return jsonpickle.encode(dummy_data)
+
+
+@app.route('/api/repo/', methods=['GET','POST'])
+def get_stats_from_params():
+    repo = request.args.get('repo')
+    user = request.args.get('user')
+    print(f'Repo: {repo}; User: {user}')
+    return jsonpickle.encode(dummy_data)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=105)

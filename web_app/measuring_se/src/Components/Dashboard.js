@@ -1,4 +1,5 @@
 import { React, Component } from 'react'
+import axios from "axios"
 import { Disclosure } from '@headlessui/react'
 import { SearchIcon } from '@heroicons/react/solid'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
@@ -20,10 +21,14 @@ export default class Dashboard extends Component {
     }
 
     componentDidMount() {
-        fetch('http://10.5.64.223:105/data/user/SamuelAl/repo/hexbin/')
-            .then(response => response.json())
-            .then(body => {
-                let prcData = this.prepareData(body)
+        axios.get('http://10.5.64.223:105/api/repo', {
+            params: {
+                user: "SamuelAl",
+                repo: "hexbin"
+            }
+        })
+            .then(res => {
+                let prcData = this.prepareData(res.data)
                 this.setState({
                     data: prcData
                 }, () => {
