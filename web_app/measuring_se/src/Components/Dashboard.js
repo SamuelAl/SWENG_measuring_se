@@ -39,15 +39,15 @@ export default class Dashboard extends Component {
 
     prepareData = (rawData) => {
         return Object.keys(rawData)
-        .map((key) => {
-            return ({
-                date: key,
-                additions: rawData[key].additions,
-                changes: rawData[key].changes,
-                deletions: rawData[key].deletions,
+            .map((key) => {
+                return ({
+                    date: key,
+                    additions: rawData[key].additions,
+                    changes: rawData[key].changes,
+                    deletions: rawData[key].deletions,
+                })
             })
-        })
-        .sort((a,b) => a.date.localeCompare(b.date))    
+            .sort((a, b) => a.date.localeCompare(b.date))
     }
 
     render() {
@@ -95,14 +95,27 @@ export default class Dashboard extends Component {
                         </Disclosure>
                         <header className="py-10">
                             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                                <h1 className="text-3xl font-bold text-white">Dashboard</h1>
+                                <h1 className="text-3xl font-bold text-white">
+                                    Refactoring Visualization
+                                </h1>
+                                <h3 className="text-xl font-semibold text-white">
+                                    Visualize the proportion of additions and deletions in a repo's history,
+                                    from its creation to its present state.
+                                </h3>
                             </div>
                         </header>
                     </div>
 
                     <main className="h-full -mt-32">
                         <div className="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
-                            {/* Replace with your content */}
+                            <div className="flex bg-white rounded-lg shadow my-6 px-5 py-6 sm:px-6">
+                                <h3 className="text-xl font-semibold text-black">
+                                    Repository Details
+                                </h3>
+                                
+                            </div>
+
+
                             <div className="flex justify-center  bg-white rounded-lg shadow px-5 py-6 sm:px-6">
 
                                 {this.state.data != null &&
@@ -110,7 +123,6 @@ export default class Dashboard extends Component {
                                 }
 
                             </div>
-                            {/* /End replace */}
                         </div>
                     </main>
                 </div>
