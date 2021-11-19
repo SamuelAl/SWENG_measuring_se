@@ -4,6 +4,7 @@ import { Disclosure } from '@headlessui/react'
 import { SearchIcon } from '@heroicons/react/solid'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import DataChart from './DataChart'
+import TextInput from './TextInput'
 
 const navigation = [
     { name: 'Dashboard', href: '#', current: true },
@@ -17,14 +18,14 @@ function classNames(...classes) {
 export default class Dashboard extends Component {
 
     state = {
+        repo: "",
         data: []
     }
 
     componentDidMount() {
         axios.get('http://10.5.64.223:105/api/repo', {
             params: {
-                user: "SamuelAl",
-                repo: "hexbin"
+                repo: this.state.repo
             }
         })
             .then(res => {
@@ -35,6 +36,12 @@ export default class Dashboard extends Component {
                     console.log(this.state)
                 })
             })
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
     }
 
     prepareData = (rawData) => {
@@ -108,11 +115,37 @@ export default class Dashboard extends Component {
 
                     <main className="h-full -mt-32">
                         <div className="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
-                            <div className="flex bg-white rounded-lg shadow my-6 px-5 py-6 sm:px-6">
-                                <h3 className="text-xl font-semibold text-black">
-                                    Repository Details
-                                </h3>
-                                
+                            <div className="flex flex-col bg-white rounded-lg shadow my-6 px-5 py-6 sm:px-6">
+                                <div className="mb-4">
+                                    <h3 className="text-xl font-semibold text-black">
+                                        Repository Details
+                                    </h3>
+                                </div>
+                                <div className="flex gap-2 items-end">
+                                    <div className="w-60">
+                                        <TextInput params={
+                                            {
+                                                type: "text",
+                                                label: "Repository Name",
+                                                id: "repo",
+                                                name: "repo_name",
+                                                placeholder: "SamuelAl/hexbin",
+                                                onChange: this.handleChange,
+                                                value: this.state.repo
+                                            }
+
+                                        } />
+                                    </div>
+                                    <button
+                                        type="button"
+                                        className="inline-flex h-10 items-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                    >
+                                        <SearchIcon className="-ml-1 mr-3 h-5 w-5" aria-hidden="true" />
+                                        Search
+                                    </button>
+
+                                </div>
+
                             </div>
 
 
