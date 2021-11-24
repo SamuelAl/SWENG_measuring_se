@@ -204,6 +204,10 @@ export default class Dashboard extends Component {
                                 </div>
                                 <div className="col-span-1 flex-col gap-2 bg-white px-5 py-6 sm:px-6 overflow-auto"
                                     style={{height: "600px"}}>
+                                    <div className="mb-4">
+                                        <h3 className="text-xl font-semibold">Selected User:</h3>
+                                        <p className="text-lg">{this.state.contributor ? this.state.contributor : "All"}</p>
+                                    </div>
                                     {this.state.contributors && this.state.contributors.map((c) => <UserBadge user={c} 
                                                onClick={this.handleSelectContributor} />)}
                                 </div>
