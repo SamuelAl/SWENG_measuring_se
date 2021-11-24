@@ -29,12 +29,12 @@ export default class Dashboard extends Component {
                 repo: this.state.repo
             }
         })
-        .then(res => {
-            let prcData = this.prepareData(res.data)
-            this.setState({
-                data: prcData
+            .then(res => {
+                let prcData = this.prepareData(res.data)
+                this.setState({
+                    data: prcData
+                })
             })
-        })
     }
 
     fetchData = () => {
@@ -48,12 +48,12 @@ export default class Dashboard extends Component {
                 repo: this.state.repo
             }
         })
-        .then(res => {
-            let prcData = this.prepareData(res.data)
-            this.setState({
-                data: prcData
+            .then(res => {
+                let prcData = this.prepareData(res.data)
+                this.setState({
+                    data: prcData
+                })
             })
-        })
     }
 
     fetchContributors = () => {
@@ -62,12 +62,12 @@ export default class Dashboard extends Component {
                 repo: this.state.repo
             }
         })
-        .then(res => {
-            let contributors = res.data
-            this.setState({
-                contributors: contributors
+            .then(res => {
+                let contributors = res.data
+                this.setState({
+                    contributors: contributors
+                })
             })
-        })
     }
 
     handleChange = (e) => {
@@ -95,40 +95,40 @@ export default class Dashboard extends Component {
                 <div className="min-h-full">
                     <div className="bg-indigo-600 pb-32">
                         <nav className="bg-indigo-600 border-b border-indigo-300 border-opacity-25 lg:border-none">
-                                <>
-                                    <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
-                                        <div className="relative h-16 flex items-center justify-between lg:border-b lg:border-indigo-400 lg:border-opacity-25">
-                                            <div className="px-2 flex items-center lg:px-0">
-                                                <div className="flex-shrink-0">
-                                                    <img
-                                                        className="block h-8 w-8"
-                                                        src="https://tailwindui.com/img/logos/workflow-mark-indigo-300.svg"
-                                                        alt="Workflow"
-                                                    />
-                                                </div>
-                                                <div className="hidden lg:block lg:ml-10">
-                                                    <div className="flex space-x-4">
-                                                        {navigation.map((item) => (
-                                                            <a
-                                                                key={item.name}
-                                                                href={item.href}
-                                                                className={classNames(
-                                                                    item.current
-                                                                        ? 'bg-indigo-700 text-white'
-                                                                        : 'text-white hover:bg-indigo-500 hover:bg-opacity-75',
-                                                                    'rounded-md py-2 px-3 text-sm font-medium'
-                                                                )}
-                                                                aria-current={item.current ? 'page' : undefined}
-                                                            >
-                                                                {item.name}
-                                                            </a>
-                                                        ))}
-                                                    </div>
+                            <>
+                                <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+                                    <div className="relative h-16 flex items-center justify-between lg:border-b lg:border-indigo-400 lg:border-opacity-25">
+                                        <div className="px-2 flex items-center lg:px-0">
+                                            <div className="flex-shrink-0">
+                                                <img
+                                                    className="block h-8 w-8"
+                                                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-300.svg"
+                                                    alt="Workflow"
+                                                />
+                                            </div>
+                                            <div className="hidden lg:block lg:ml-10">
+                                                <div className="flex space-x-4">
+                                                    {navigation.map((item) => (
+                                                        <a
+                                                            key={item.name}
+                                                            href={item.href}
+                                                            className={classNames(
+                                                                item.current
+                                                                    ? 'bg-indigo-700 text-white'
+                                                                    : 'text-white hover:bg-indigo-500 hover:bg-opacity-75',
+                                                                'rounded-md py-2 px-3 text-sm font-medium'
+                                                            )}
+                                                            aria-current={item.current ? 'page' : undefined}
+                                                        >
+                                                            {item.name}
+                                                        </a>
+                                                    ))}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </>
+                                </div>
+                            </>
                         </nav>
                         <header className="py-10">
                             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -169,25 +169,25 @@ export default class Dashboard extends Component {
                                     <button
                                         type="button"
                                         className="inline-flex h-10 items-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-
                                         onClick={this.fetchData}
                                     >
                                         <SearchIcon className="-ml-1 mr-3 h-5 w-5" aria-hidden="true" />
                                         Search
                                     </button>
-
                                 </div>
-
                             </div>
 
-
-                            <div className="flex justify-center  bg-white rounded-lg shadow px-5 py-6 sm:px-6">
-
-                                {this.state.data != null &&
-                                    <DataChart data={this.state.data}></DataChart>
-                                }
-
+                            <div className="grid grid-cols-4 gap-8">
+                                <div className="col-span-3 flex justify-center bg-white rounded-lg shadow px-5 py-6 sm:px-6">
+                                    {this.state.data != null &&
+                                        <DataChart data={this.state.data}></DataChart>
+                                    }
+                                </div>
+                                <div className="col-span-1 flex justify-center bg-white rounded-lg shadow px-5 py-6 sm:px-6">
+                                    
+                                </div>
                             </div>
+
                         </div>
                     </main>
                 </div>
