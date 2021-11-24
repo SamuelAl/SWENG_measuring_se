@@ -4,7 +4,7 @@ import json
 import pprint
 # import pymongo
 
-g = Github("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") #you know what to do
+g = Github("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") #you know what to do
 
 class CommitStats:
     def __init__(self, additions, changes, deletions):
@@ -34,6 +34,10 @@ def get_user_repos(usr_name):
 
 def get_repo_commits(repo_name):
     return g.get_repo(repo_name).get_commits()
+
+def get_repo_contributors(repo_name): 
+    return g.get_repo(repo_name).get_contributors()
+
 
 def get_commit_stats_by_date(repo_name):
     date_dct = {} 

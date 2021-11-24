@@ -57,6 +57,12 @@ def get_stats_from_params():
     print(f'Getting info for Repo: {repo}')
     return jsonpickle.encode(get_commit_stats_by_date(repo))
 
+@app.route('/api/repo/contributors', methods=['GET','POST'])
+def get_contributors():
+    repo = request.args.get('repo')
+    print(f'Getting info for Repo: {repo}')
+    return jsonpickle.encode(get_repo_contributors(repo))
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=105)
