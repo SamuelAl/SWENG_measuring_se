@@ -6,6 +6,7 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import DataChart from './DataChart'
 import TextInput from './TextInput'
 import UserBadge from './UserBadge'
+import Toggle from './Toggle'
 
 const navigation = [
     { name: 'Dashboard', href: '#', current: true },
@@ -193,6 +194,13 @@ export default class Dashboard extends Component {
                                         <SearchIcon className="-ml-1 mr-3 h-5 w-5" aria-hidden="true" />
                                         Search
                                     </button>
+                                    
+                                    <div className="ml-10">
+                                    <Toggle label="Normalize Data" />
+                                    </div>
+                                    
+                                    
+                                    
                                 </div>
                             </div>
 
