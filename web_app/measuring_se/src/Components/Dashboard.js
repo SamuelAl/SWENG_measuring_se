@@ -20,6 +20,7 @@ export default class Dashboard extends Component {
 
     state = {
         repo: "",
+        contributor: null,
         data: [],
         contributors: [],
     }
@@ -33,10 +34,15 @@ export default class Dashboard extends Component {
     }
 
     fetchCommitStats = () => {
+        const {repo, contributor} =  this.state
+        let params = {
+            repo: repo
+        }
+        if (contributor && contributor !== "") {
+            params.user = contributor
+        }
         axios.get('http://10.5.64.223:105/api/repo', {
-            params: {
-                repo: this.state.repo
-            }
+            params: params
         })
             .then(res => {
                 let prcData = this.processData(res.data)
@@ -64,6 +70,12 @@ export default class Dashboard extends Component {
         this.setState({
             [e.target.id]: e.target.value
         })
+    }
+
+    handleSelectContributor = (c) => {
+        this.setState({
+            contributor: c
+        }, () => this.fetchCommitStats())
     }
 
     processData = (rawData) => {
@@ -163,7 +175,6 @@ export default class Dashboard extends Component {
                                                 onChange: this.handleChange,
                                                 value: this.state.repo
                                             }
-
                                         } />
                                     </div>
                                     <button
@@ -183,16 +194,16 @@ export default class Dashboard extends Component {
                                         <DataChart data={this.state.data}></DataChart>
                                     }
                                 </div>
-                                <div className="col-span-1 flex-row gap-2 bg-white  px-5 py-6 sm:px-6">
-                                    {this.state.contributors && this.state.contributors.map((c) => <UserBadge user={c}/>)}
+                                <div className="col-span-1 flex-col gap-2 bg-white px-5 py-6 sm:px-6 overflow-auto"
+                                    style={{height: "600px"}}>
+                                    {this.state.contributors && this.state.contributors.map((c) => <UserBadge user={c} 
+                                               onClick={this.handleSelectContributor} />)}
                                 </div>
                             </div>
-
                         </div>
                     </main>
                 </div>
             </>
         )
     }
-
 }

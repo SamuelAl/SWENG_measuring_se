@@ -54,8 +54,12 @@ def get_stats(username,repo_name):
 @app.route('/api/repo/', methods=['GET','POST'])
 def get_stats_from_params():
     repo = request.args.get('repo')
-    print(f'Getting info for Repo: {repo}')
-    return jsonpickle.encode(get_commit_stats_by_date(repo))
+    user = request.args.get('user')
+    print(f'Getting info for Repo: {repo}; User: {user}')
+    if user is None:
+        return jsonpickle.encode(get_commit_stats_by_date(repo))
+    
+    return jsonpickle.encode(get_commit_stats_by_date_user(repo, user))
 
 @app.route('/api/repo/contributors', methods=['GET','POST'])
 def get_contributors():
