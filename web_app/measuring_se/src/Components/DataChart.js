@@ -6,7 +6,7 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 
 export default function DataChart({data}) {
     return (
-        <div className="w-10/12" style={{height: "500px"}}>
+        <div className="w-11/12" style={{height: "500px"}}>
             <ResponsiveContainer>
                 <AreaChart
                     data={data}
