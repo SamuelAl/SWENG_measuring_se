@@ -21,6 +21,15 @@ class CommitStats:
         self.deletions = self.deletions / self.changes
         self.standardized = True
 
+class ContributorInfo:
+    def __init__(self, login, avatar_url):
+        self.login = login
+        self.avatar_url = avatar_url
+    
+    def __str__(self):
+        return f'Login: {self.login}; Avatar URL: {self.avatar_url}'
+
+
 def calculate_commit_stats(files):
     stats = CommitStats(0,0,0)
     for file in files:
@@ -35,8 +44,12 @@ def get_user_repos(usr_name):
 def get_repo_commits(repo_name):
     return g.get_repo(repo_name).get_commits()
 
-def get_repo_contributors(repo_name): 
-    return g.get_repo(repo_name).get_contributors()
+def get_repo_contributors(repo_name):
+    contributor_dct = {} 
+    contributors = g.get_repo(repo_name).get_contributors()
+    for contributor in contributors:
+        contributor_dct[contributor.login] = ContributorInfo(contributor.login, contributor.avatar_url)
+    return contributor_dct
 
 
 def get_commit_stats_by_date(repo_name):

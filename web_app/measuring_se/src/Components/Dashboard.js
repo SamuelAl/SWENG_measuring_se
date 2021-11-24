@@ -19,7 +19,8 @@ export default class Dashboard extends Component {
 
     state = {
         repo: "",
-        data: []
+        data: [],
+        contributors: [],
     }
 
     componentDidMount() {
@@ -37,6 +38,11 @@ export default class Dashboard extends Component {
     }
 
     fetchData = () => {
+        this.fetchCommitStats()
+        this.fetchContributors()
+    }
+
+    fetchCommitStats = () => {
         axios.get('http://10.5.64.223:105/api/repo', {
             params: {
                 repo: this.state.repo
@@ -46,6 +52,20 @@ export default class Dashboard extends Component {
             let prcData = this.prepareData(res.data)
             this.setState({
                 data: prcData
+            })
+        })
+    }
+
+    fetchContributors = () => {
+        axios.get('http://10.5.64.223:105/api/repo/contributors', {
+            params: {
+                repo: this.state.repo
+            }
+        })
+        .then(res => {
+            let contributors = res.data
+            this.setState({
+                contributors: contributors
             })
         })
     }
