@@ -24,7 +24,7 @@ export default class Dashboard extends Component {
         contributor: null,
         data: [],
         contributors: [],
-        normalized: false
+        normalize: false
     }
 
     componentDidMount() {
@@ -36,9 +36,10 @@ export default class Dashboard extends Component {
     }
 
     fetchCommitStats = () => {
-        const {repo, contributor} =  this.state
+        const {repo, contributor, normalize} =  this.state
         let params = {
-            repo: repo
+            repo: repo,
+            normalize: normalize
         }
         if (contributor && contributor !== "") {
             params.user = contributor
@@ -72,6 +73,12 @@ export default class Dashboard extends Component {
         this.setState({
             [e.target.id]: e.target.value
         })
+    }
+
+    handleToggleNormalize = (v) => {
+        this.setState({
+            normalize: v
+        }, this.fetchCommitStats)
     }
 
     handleSelectContributor = (c) => {
@@ -197,7 +204,7 @@ export default class Dashboard extends Component {
                                     </button>
                                     
                                     <div className="ml-10">
-                                    <Toggle label="Normalize Data" />
+                                    <Toggle label="Normalize Data" enabled={this.state.normalize} onChange={this.handleToggleNormalize} />
                                     </div>
                                     
                                     

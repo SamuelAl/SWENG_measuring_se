@@ -52,7 +52,7 @@ def get_repo_contributors(repo_name):
     return contributor_dct
 
 
-def get_commit_stats_by_date(repo_name):
+def get_commit_stats_by_date(repo_name, normalized):
     date_dct = {} 
     commits = get_repo_commits(repo_name)
     print(commits.totalCount)
@@ -70,13 +70,14 @@ def get_commit_stats_by_date(repo_name):
         else:
             date_dct[date_str] = CommitStats(stats.additions,stats.changes,stats.deletions)
     
-    #for k,v in date_dct.items():
-    #   v.standardize()
-    #   date_dct[k] = v
+    if normalized:
+        for k,v in date_dct.items():
+            v.standardize()
+            date_dct[k] = v
     
     return date_dct
 
-def get_commit_stats_by_date_user(repo_name, user):
+def get_commit_stats_by_date_user(repo_name, user, normalized):
     date_dct = {} 
     commits = get_repo_commits(repo_name)
     print(commits.totalCount)
@@ -96,9 +97,10 @@ def get_commit_stats_by_date_user(repo_name, user):
         else:
             date_dct[date_str] = CommitStats(stats.additions,stats.changes,stats.deletions)
     
-    #for k,v in date_dct.items():
-    #   v.standardize()
-    #   date_dct[k] = v
+    if normalized:
+        for k,v in date_dct.items():
+            v.standardize()
+            date_dct[k] = v
     
     return date_dct
 
