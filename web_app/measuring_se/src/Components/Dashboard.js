@@ -5,6 +5,7 @@ import { SearchIcon } from '@heroicons/react/solid'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import DataChart from './DataChart'
 import TextInput from './TextInput'
+import UserBadge from './UserBadge'
 
 const navigation = [
     { name: 'Dashboard', href: '#', current: true },
@@ -24,7 +25,6 @@ export default class Dashboard extends Component {
     }
 
     componentDidMount() {
-        
     }
 
     fetchData = () => {
@@ -184,19 +184,7 @@ export default class Dashboard extends Component {
                                     }
                                 </div>
                                 <div className="col-span-1 flex-row gap-2 bg-white  px-5 py-6 sm:px-6">
-                                    {this.state.contributors && this.state.contributors.map((c) => {
-                                        return (
-                                            <div className="flex  gap-3  bg-white rounded-md shadow hover:shadow-lg w-full h-20 overflow-hidden">
-                                                <img src={c.avatar_url} alt="" />
-                                                <div className="mt-4">
-                                                <span className="text-lg text-gray-700">
-                                                    {c.login}
-                                                </span>
-                                                </div>
-                                                
-                                            </div>
-                                        )
-                                    })}
+                                    {this.state.contributors && this.state.contributors.map((c) => <UserBadge user={c}/>)}
                                 </div>
                             </div>
 
