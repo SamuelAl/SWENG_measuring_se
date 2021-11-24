@@ -24,6 +24,7 @@ export default class Dashboard extends Component {
         contributor: null,
         data: [],
         contributors: [],
+        normalized: false
     }
 
     componentDidMount() {
