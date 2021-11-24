@@ -24,17 +24,7 @@ export default class Dashboard extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://10.5.64.223:105/api/repo', {
-            params: {
-                repo: this.state.repo
-            }
-        })
-            .then(res => {
-                let prcData = this.prepareData(res.data)
-                this.setState({
-                    data: prcData
-                })
-            })
+        
     }
 
     fetchData = () => {
@@ -49,7 +39,7 @@ export default class Dashboard extends Component {
             }
         })
             .then(res => {
-                let prcData = this.prepareData(res.data)
+                let prcData = this.processData(res.data)
                 this.setState({
                     data: prcData
                 })
@@ -63,7 +53,7 @@ export default class Dashboard extends Component {
             }
         })
             .then(res => {
-                let contributors = res.data
+                let contributors = this.processContributors(res.data)
                 this.setState({
                     contributors: contributors
                 })
@@ -76,7 +66,7 @@ export default class Dashboard extends Component {
         })
     }
 
-    prepareData = (rawData) => {
+    processData = (rawData) => {
         return Object.keys(rawData)
             .map((key) => {
                 return ({
@@ -87,6 +77,16 @@ export default class Dashboard extends Component {
                 })
             })
             .sort((a, b) => a.date.localeCompare(b.date))
+    }
+
+    processContributors = (rawData) => {
+        return Object.keys(rawData)
+        .map((key) => {
+            return ({
+                login: key,
+                avatar_url: rawData[key].avatar_url,
+            })
+        })
     }
 
     render() {
@@ -183,8 +183,20 @@ export default class Dashboard extends Component {
                                         <DataChart data={this.state.data}></DataChart>
                                     }
                                 </div>
-                                <div className="col-span-1 flex justify-center bg-white rounded-lg shadow px-5 py-6 sm:px-6">
-                                    
+                                <div className="col-span-1 flex-row gap-2 bg-white  px-5 py-6 sm:px-6">
+                                    {this.state.contributors && this.state.contributors.map((c) => {
+                                        return (
+                                            <div className="flex  gap-3  bg-white rounded-md shadow hover:shadow-lg w-full h-20 overflow-hidden">
+                                                <img src={c.avatar_url} alt="" />
+                                                <div className="mt-4">
+                                                <span className="text-lg text-gray-700">
+                                                    {c.login}
+                                                </span>
+                                                </div>
+                                                
+                                            </div>
+                                        )
+                                    })}
                                 </div>
                             </div>
 
