@@ -107,8 +107,10 @@ def get_commit_stats(repo_name, user):
     is_in_db = repos_collection.count_documents({"repo_name": repo_name}) >= 1
     stats = []
     if is_in_db:
-        stats = commit_stats_collection.find(
+        stats_raw = commit_stats_collection.find(
             {"repo_name": repo_name, "contributor": user})
+        for stat in stats_raw:
+            stats.append(stat)
     else:
         repo_doc = {
             "repo_name": repo_name,
@@ -120,6 +122,20 @@ def get_commit_stats(repo_name, user):
         stats = [a for a in unfltr_stats if a["contributor"] == user]
     return stats
 
+def get_repo_contributors_data(repo_name):
+    is_in_db = repos_collection.count_documents({"repo_name": repo_name}) >= 1
+    if is_in_db:
+        repo_data = repos_collection.find_one({"repo_name": repo_name})
+        contributors = repo_data["contributors"]
+        return contributors
+    else:
+        repo_doc = {
+            "repo_name": repo_name,
+            "contributors": get_repo_contributors(repo_name),
+        }
+        repos_collection.insert_one(repo_doc)
+        unfltr_stats = get_commit_stats_from_api(repo_name)
+        commit_stats_collection.insert_many(unfltr_stats)
+        return repo_doc["contributors"]
 
-
-get_commit_stats("SamuelAl/hexbin", "SamuelAl")
+# get_commit_stats("SamuelAl/hexbin", "SamuelAl")

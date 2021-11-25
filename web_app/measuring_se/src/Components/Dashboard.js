@@ -48,6 +48,7 @@ export default class Dashboard extends Component {
             params: params
         })
             .then(res => {
+                console.log(res.data)
                 let prcData = this.processData(res.data)
                 this.setState({
                     data: prcData
@@ -96,13 +97,13 @@ export default class Dashboard extends Component {
     }
 
     processData = (rawData) => {
-        return Object.keys(rawData)
-            .map((key) => {
+        return rawData
+            .map((value) => {
                 return ({
-                    date: key,
-                    additions: rawData[key].additions,
-                    changes: rawData[key].changes,
-                    deletions: rawData[key].deletions,
+                    date: value.date,
+                    additions: value.stats.additions,
+                    changes: value.stats.changes,
+                    deletions: value.stats.deletions,
                 })
             })
             .sort((a, b) => a.date.localeCompare(b.date))
