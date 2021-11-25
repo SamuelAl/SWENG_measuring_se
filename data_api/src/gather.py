@@ -2,9 +2,17 @@ from datetime import datetime
 from github import Github
 import json
 import pprint
-# import pymongo
+import pymongo
 
-g = Github("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") #you know what to do
+g = Github("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")
+
+# Establish connection to database
+conn = "mongo:27017"
+client = pymongo.MongoClient('localhost',27017)
+
+db = client.github_database
+repos_collection = db.repos
+
 
 class CommitStats:
     def __init__(self, additions, changes, deletions):
