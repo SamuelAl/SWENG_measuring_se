@@ -23,6 +23,13 @@ def stats_add(a, b):
     a["changes"] += b["changes"]
     a["deletions"] += b["deletions"]
 
+def normalize_commit_stat(commit_stat):
+    stat = commit_stat["stats"]
+    stat["additions"] /= stat["changes"]
+    stat["deletions"] /= stat["changes"]
+    commit_stat["stats"] = stat
+    return commit_stat
+
 def calculate_commit_stats(files):
     stats = {
         "additions": 0,
@@ -103,13 +110,15 @@ def get_commit_stats_from_api(repo_name):
     return commit_stats_arr
 
 
-def get_commit_stats(repo_name, user):
+def get_commit_stats(repo_name, user, normalize):
     is_in_db = repos_collection.count_documents({"repo_name": repo_name}) >= 1
     stats = []
     if is_in_db:
         stats_raw = commit_stats_collection.find(
             {"repo_name": repo_name, "contributor": user})
         for stat in stats_raw:
+            if normalize:
+                stat = normalize_commit_stat(stat)
             stats.append(stat)
     else:
         repo_doc = {
@@ -119,7 +128,11 @@ def get_commit_stats(repo_name, user):
         repos_collection.insert_one(repo_doc)
         unfltr_stats = get_commit_stats_from_api(repo_name)
         commit_stats_collection.insert_many(unfltr_stats)
-        stats = [a for a in unfltr_stats if a["contributor"] == user]
+        if normalize:
+            stats = [normalize_commit_stat(a) for a in unfltr_stats if a["contributor"] == user]
+        else:
+            stats = [a for a in unfltr_stats if a["contributor"] == user]
+
     return stats
 
 def get_repo_contributors_data(repo_name):

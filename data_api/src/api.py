@@ -51,9 +51,9 @@ def get_stats_from_params():
     normalize = request.args.get('normalize') == "true"
     print(f'Getting info for Repo: {repo}; User: {user}; Normalize: {normalize}')
     if user is None:
-        return jsonpickle.encode(get_commit_stats(repo, "all"))
-    
-    return jsonpickle.encode(get_commit_stats(repo, user))
+        user = ALL_AUTHORS
+
+    return jsonpickle.encode(get_commit_stats(repo, user, normalize))
 
 
 @app.route('/api/repo/contributors', methods=['GET','POST'])
