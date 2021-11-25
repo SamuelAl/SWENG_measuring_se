@@ -53,7 +53,6 @@ export default class Dashboard extends Component {
             params: params
         })
             .then(res => {
-                console.log(res.data)
                 let prcData = this.processData(res.data)
                 this.setState({
                     data: prcData,
@@ -70,7 +69,6 @@ export default class Dashboard extends Component {
         })
             .then(res => {
                 let contributors = res.data
-                console.log(res.data)
                 this.setState({
                     contributors: contributors
                 })
