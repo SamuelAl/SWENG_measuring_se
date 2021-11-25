@@ -112,6 +112,15 @@ def get_commit_stats_by_date_user(repo_name, user, normalized):
     
     return date_dct
 
+def get_commit_stats_mongo(repo_name, user, normalized):
+    # Initializing dictionary with repo name
+    repo_dct = {
+        repo_name: repo_name
+    }
+    # Get repo contributors
+    contributors = get_repo_contributors(repo_name)
+
+
 
 
 
