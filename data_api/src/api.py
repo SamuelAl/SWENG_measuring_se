@@ -44,13 +44,6 @@ dummy_data = {
 def welcome():
     return "Hello!"
 
-@app.route('/data/user/<string:username>/repo/<string:repo_name>/', methods=['GET','POST'])
-def get_stats(username,repo_name):
-    #full_repo_name = username + "/" + repo_name
-    #return jsonpickle.encode(get_commit_stats_by_date(full_repo_name))
-    return jsonpickle.encode(dummy_data)
-
-
 @app.route('/api/repo/', methods=['GET','POST'])
 def get_stats_from_params():
     repo = request.args.get('repo')

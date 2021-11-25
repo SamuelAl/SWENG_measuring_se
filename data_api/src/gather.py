@@ -121,4 +121,5 @@ def get_commit_stats(repo_name, user):
     return stats
 
 
+
 get_commit_stats("SamuelAl/hexbin", "SamuelAl")
