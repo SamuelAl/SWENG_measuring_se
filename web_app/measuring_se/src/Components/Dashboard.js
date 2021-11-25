@@ -63,7 +63,8 @@ export default class Dashboard extends Component {
             }
         })
             .then(res => {
-                let contributors = this.processContributors(res.data)
+                let contributors = res.data
+                console.log(res.data)
                 this.setState({
                     contributors: contributors
                 })
@@ -107,16 +108,6 @@ export default class Dashboard extends Component {
                 })
             })
             .sort((a, b) => a.date.localeCompare(b.date))
-    }
-
-    processContributors = (rawData) => {
-        return Object.keys(rawData)
-        .map((key) => {
-            return ({
-                login: key,
-                avatar_url: rawData[key].avatar_url,
-            })
-        })
     }
 
     render() {
