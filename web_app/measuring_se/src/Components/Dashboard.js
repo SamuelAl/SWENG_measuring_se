@@ -7,6 +7,7 @@ import DataChart from './DataChart'
 import TextInput from './TextInput'
 import UserBadge from './UserBadge'
 import Toggle from './Toggle'
+import Spinner from './Spinner'
 
 const navigation = [
     { name: 'Dashboard', href: '#', current: true },
@@ -24,13 +25,17 @@ export default class Dashboard extends Component {
         contributor: null,
         data: [],
         contributors: [],
-        normalize: false
+        normalize: false,
+        loading: false
     }
 
     componentDidMount() {
     }
 
     fetchData = () => {
+        this.setState({
+            loading: true
+        })
         this.fetchCommitStats()
         this.fetchContributors()
     }
@@ -51,7 +56,8 @@ export default class Dashboard extends Component {
                 console.log(res.data)
                 let prcData = this.processData(res.data)
                 this.setState({
-                    data: prcData
+                    data: prcData,
+                    loading: false
                 })
             })
     }
@@ -206,7 +212,10 @@ export default class Dashboard extends Component {
 
                             <div className="grid grid-cols-4 gap-8">
                                 <div className="col-span-3 flex justify-center bg-white rounded-lg shadow px-5 py-6 sm:px-6">
-                                    {this.state.data != null &&
+                                    {this.state.loading &&
+                                        <Spinner />
+                                    }
+                                    {!this.state.loading && this.state.data != null &&
                                         <DataChart data={this.state.data}></DataChart>
                                     }
                                 </div>
