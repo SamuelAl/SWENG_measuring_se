@@ -3,7 +3,7 @@ from github import Github
 
 ALL_AUTHORS = "all"
 
-g = Github("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")
+g = Github("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e") # you know what to do
 
 def stats_add(a, b):
     a["additions"] += b["additions"]
