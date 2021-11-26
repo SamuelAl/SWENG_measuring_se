@@ -25,6 +25,9 @@ def stats_add(a, b):
 
 def normalize_commit_stat(commit_stat):
     stat = commit_stat["stats"]
+    if stat["changes"] == 0:
+        return commit_stat
+    
     stat["additions"] /= stat["changes"]
     stat["deletions"] /= stat["changes"]
     commit_stat["stats"] = stat
