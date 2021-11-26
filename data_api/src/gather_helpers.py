@@ -1,10 +1,16 @@
+import os
 from datetime import datetime
 from github import Github
 from credentials import GITHUB_TOKEN
 
 ALL_AUTHORS = "all"
 
-g = Github(GITHUB_TOKEN) 
+token = os.environ['TOKEN']
+if token is None or token == "":
+    print("Error: no Github token provided. Attempting to use Debug token if available")
+    token = GITHUB_TOKEN
+
+g = Github(token) 
 
 def stats_add(a, b):
     a["additions"] += b["additions"]

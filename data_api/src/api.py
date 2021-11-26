@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request
 from flask_cors import CORS
 import jsonpickle
@@ -6,6 +7,8 @@ from gather_helpers import *
 
 app = Flask(__name__)
 cors = CORS(app)
+
+print(os.environ["TOKEN"])
 
 @app.route('/hello/', methods=['GET','POST'])
 def welcome():

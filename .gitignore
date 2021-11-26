@@ -24,3 +24,4 @@ yarn-error.log*
 data_api/src/__pycache__
 
 data_api/src/credentials.py
+.env
