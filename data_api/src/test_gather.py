@@ -1,4 +1,4 @@
-from gather import *
+from gather_helpers import *
 
 TEST_REPO_NAME = "SamuelAl/test_repo"
 
