@@ -1,9 +1,10 @@
 from datetime import datetime
 from github import Github
+from credentials import GITHUB_TOKEN
 
 ALL_AUTHORS = "all"
 
-g = Github("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e") # you know what to do
+g = Github(GITHUB_TOKEN) 
 
 def stats_add(a, b):
     a["additions"] += b["additions"]
