@@ -46,10 +46,6 @@ def calculate_commit_stats(files):
     return stats
 
 
-def get_user_repos(usr_name):
-    return g.get_user("usr_name")
-
-
 def get_repo_commits(repo_name):
     return g.get_repo(repo_name).get_commits()
 

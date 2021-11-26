@@ -43,3 +43,5 @@ def test_normalize_commit_stat():
     assert norm_stat["additions"] == 0
     assert norm_stat["changes"] == 0
     assert norm_stat["deletions"] == 0
+
+
