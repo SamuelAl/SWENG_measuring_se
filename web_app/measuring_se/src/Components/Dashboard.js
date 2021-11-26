@@ -11,7 +11,6 @@ import Spinner from './Spinner'
 
 const navigation = [
     { name: 'Dashboard', href: '#', current: true },
-    { name: 'About', href: '#', current: false },
 ]
 
 function classNames(...classes) {
