@@ -48,7 +48,7 @@ export default class Dashboard extends Component {
         if (contributor && contributor !== "") {
             params.user = contributor
         }
-        axios.get('http://localhost:105/api/repo', {
+        axios.get('api/repo/', {
             params: params
         })
             .then(res => {
@@ -61,7 +61,7 @@ export default class Dashboard extends Component {
     }
 
     fetchContributors = () => {
-        axios.get('http://localhost:105/api/repo/contributors', {
+        axios.get('api/repo/contributors', {
             params: {
                 repo: this.state.repo
             }

@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  frontend:
+    image: samalarco/measuring_se/frontend:latest
+    ports:
+      - "3000:80"
+    
+  backend:
+    container_name: "backend"
+    image: samalarco/measuring_se/backend_api:latest
+    ports:
+      - "5000:5000"
+    environment:
+      - TOKEN=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
+    
+  mongo:
+    container_name: "mongo"
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    
