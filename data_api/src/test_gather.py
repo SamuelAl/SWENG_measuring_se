@@ -46,7 +46,7 @@ def test_normalize_commit_stat():
 
 def test_get_repo_contributors():
     # Get a personal repo with a single contributor
-    arr = get_repo_contributors("SamuelAl/hexbin")
+    arr = get_repo_contributors("SamuelAl/test_repo")
     assert len(arr) == 1
     assert arr[0]["name"] == "SamuelAl"
     assert arr[0]["avatar_url"] == "https://avatars.githubusercontent.com/u/33717014?v=4"
@@ -54,4 +54,6 @@ def test_get_repo_contributors():
     # Get repo with multiple contributors
     arr = get_repo_contributors("SamuelAl/Clothes-Annotation-Web-App")
     assert len(arr) == 7
-    
+
+
+
