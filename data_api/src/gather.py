@@ -4,7 +4,7 @@ import pymongo
 
 # Establish connection to database
 
-client = pymongo.MongoClient('localhost', 27017)
+client = pymongo.MongoClient("mongo", 27017)
 
 db = client.github_database
 repos_collection = db.repos
