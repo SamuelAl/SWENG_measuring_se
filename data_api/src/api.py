@@ -7,40 +7,6 @@ from gather_helpers import *
 app = Flask(__name__)
 cors = CORS(app)
 
-dummy_data = {
-    "2021/01/01": {
-        "additions": 0.5,
-        "changes":56,
-        "deletions":0.5,
-    },
-     "2021/02/01": {
-        "additions": 0.2,
-        "changes":56,
-        "deletions":0.8,
-    },
-     "2021/03/01": {
-        "additions": 0.6,
-        "changes":56,
-        "deletions":0.4,
-    },
-     "2021/04/01": {
-        "additions": 0.5,
-        "changes":56,
-        "deletions":0.5,
-    },
-     "2021/05/01": {
-        "additions": 0.7,
-        "changes":56,
-        "deletions":0.3,
-    },
-     "2021/06/01": {
-        "additions": 0.4,
-        "changes":56,
-        "deletions":0.6,
-    }
-
-}
-
 @app.route('/hello/', methods=['GET','POST'])
 def welcome():
     return "Hello!"
