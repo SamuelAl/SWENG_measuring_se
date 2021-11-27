@@ -1,14 +1,14 @@
 import os
 from datetime import datetime
 from github import Github
-from credentials import GITHUB_TOKEN
+#from credentials import GITHUB_TOKEN
 
 ALL_AUTHORS = "all"
 
 token = os.environ['TOKEN']
-if token is None or token == "":
-    print("Error: no Github token provided. Attempting to use Debug token if available")
-    token = GITHUB_TOKEN
+#if token is None or token == "":
+#    print("Error: no Github token provided. Attempting to use Debug token if available")
+#    token = GITHUB_TOKEN
 
 g = Github(token) 
 
