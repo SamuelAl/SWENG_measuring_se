@@ -2,13 +2,13 @@ version: "3.9"
 
 services:
   frontend:
-    image: samalarco/measuring_se/frontend:latest
+    image: samalarco/measuring_se_frontend:latest
     ports:
       - "3000:80"
     
   backend:
     container_name: "backend"
-    image: samalarco/measuring_se/backend_api:latest
+    image: samalarco/measuring_se_backend_api:latest
     ports:
       - "5000:5000"
     environment:
