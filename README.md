@@ -67,6 +67,7 @@ This is the list of technologies and resources used to make this project possibl
 - React.js
 - npm
 - craco
+- Rechart.js
 - Tailwind CSS
 - TailwindUI
 - HeadlessUI
