@@ -44,6 +44,20 @@ docker compose up
 
 Once the stack is up and running, point your browser to *localhost:3000* to access the project´s frontend! Just type the full name of a repository in the search bar eg. *SamuelAl/SWENG_measuring_se*, and wait for the results. The first time a query is made it can take a while for the data to be processed (around 1-2 mins for a normal student´s group project repo, depending on the size of the repo). Further queries should be practically instant as the results are cached in MongoDB.
 
+## Screenshots
+
+Normalized view of repo with a single contributor.
+
+![Screenshot 1](images/screenshot1.PNG)
+
+Normalized view of repo with multiple contributors.
+
+![Screenshot 2](images/screenshot2.PNG)
+
+Standard view of a single contributor in a repo with multiple contributors.
+
+![Screenshot 2](images/screenshot3.PNG)
+
 ## Technologies Used
 
 This is the list of technologies and resources used to make this project possible.
